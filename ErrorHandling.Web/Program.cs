@@ -14,7 +14,7 @@ public class Program
             app.UseStatusCodePagesWithRedirects("/error/http/{0}");
         }
      
-
+        app.UseStaticFiles();
         app.MapControllers();
         app.Run();
     }
