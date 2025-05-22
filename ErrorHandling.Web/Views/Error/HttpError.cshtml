@@ -1,42 +1,180 @@
-﻿@model int
+﻿@model int 
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>404 - Sidan finns inte</title>
+    <meta charset="UTF-8" />
+    <title>404 - Not Found</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-        }
-
-        .emoji {
-            font-size: 80px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            background-color: #007acc;
+            margin: 0;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            perspective: 800px;
+            font-family: "Anton", sans-serif;
             color: white;
-            text-decoration: none;
+            overflow: hidden;
+        }
+
+        .header-text {
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            text-align: center;
+            font-weight: normal;
+            font-size: 1.5rem;
+            color: #eee;
+            margin: 0;
+            z-index: 10;
+        }
+
+        .scene {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 8s linear infinite;
+            margin: 50px 0;
+        }
+
+        .cube {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid white;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            user-select: none;
+        }
+
+            .face.front {
+                transform: translateZ(75px);
+            }
+
+            .face.back {
+                transform: rotateY(180deg) translateZ(75px);
+            }
+
+            .face.right {
+                transform: rotateY(90deg) translateZ(75px);
+            }
+
+            .face.left {
+                transform: rotateY(-90deg) translateZ(75px);
+            }
+
+            .face.top {
+                transform: rotateX(90deg) translateZ(75px);
+            }
+
+            .face.bottom {
+                transform: rotateX(-90deg) translateZ(75px);
+            }
+
+        @@keyframes rotate {
+            from
+
+        {
+            transform: rotateX(-20deg) rotateY(0deg);
+        }
+
+        to {
+            transform: rotateX(-20deg) rotateY(360deg);
+        }
+
+        }
+
+        .footer-section {
+            position: absolute;
+            bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-text {
+            font-weight: normal;
+            font-size: 1.2rem;
+            color: #eee;
+            text-align: center;
+            margin: 0;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #fff;
+            border: none;
             border-radius: 5px;
-            display: inline-block;
-            margin-top: 20px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: "Anton", sans-serif;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+            button:hover {
+                background-color: #ddd;
+                transform: translateY(-2px);
+            }
+
+        @@media (max-height: 600px) {
+            .header-text
+
+        {
+            top: 20px;
+            font-size: 1.2rem;
+        }
+
+        .scene {
+            margin: 20px 0;
+        }
+
+        .footer-section {
+            bottom: 20px;
+        }
+
+        .footer-text {
+            font-size: 1rem;
+        }
+
         }
     </style>
 </head>
 <body>
-    @if (Model == 404)
-    {
-        <div class="emoji">😕</div>
-        <h1>404 – Sidan kunde inte hittas</h1>
-        <p>Sidan du försökte nå finns inte eller har flyttats.</p>
-        <a class="btn" href="/">Till startsidan</a>
-    }
-    else
-    {
-        <h1>Fel @Model</h1>
-        <p>Ett okänt fel har inträffat.</p>
-    }
+    <h1 class="header-text">Oops! Page not found...</h1>
+
+    <div class="scene" aria-label="Spinning cube">
+        <div class="cube">
+            <div class="face front">4</div>
+            <div class="face back">0</div>
+            <div class="face right">4</div>
+            <div class="face left">0</div>
+            <div class="face top">4</div>
+            <div class="face bottom">0</div>
+        </div>
+    </div>
+
+    <div class="footer-section">
+        <p class="footer-text">But you found this spinning cube, so that's something!</p>
+        <button onclick="window.location.href='/'">Back Home</button>
+    </div>
 </body>
 </html>
